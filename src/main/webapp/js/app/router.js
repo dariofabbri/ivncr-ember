@@ -1,6 +1,7 @@
-define(["ember"], function(Ember){
-	var Router = Ember.Router.extend({
-
+(function(app) {
+	
+	var router = Ember.Router.extend({
+	
 		root: Ember.Route.extend({
 	    
 			index: Ember.Route.extend({
@@ -14,5 +15,6 @@ define(["ember"], function(Ember){
 		})
 	});
 
-	return Router;
-});
+	app.Router = router;
+	
+})(window.App);

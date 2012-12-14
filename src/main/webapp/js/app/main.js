@@ -1,14 +1,11 @@
-define([
-	"views/ApplicationView",
-	"controllers/ApplicationController",
-	"app/router"
-], function(ApplicationView, ApplicationController, Router) {
-
-	var App = Ember.Mixin.create({
-		ApplicationView: ApplicationView,
-		ApplicationController: ApplicationController,
-		Router: Router
+(function (win) {
+	
+	win.App = Ember.Application.create({
+		
+		ApplicationController: Ember.Controller.extend(),
+		ready: function() {
+			this.initialize();
+		}
 	});
-
-	return App;
-});
+	
+})(window);

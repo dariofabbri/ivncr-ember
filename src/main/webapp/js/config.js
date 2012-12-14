@@ -11,7 +11,7 @@ define({
 		'models': 'app/models',
 		'views': 'app/views',
 		'controllers': 'app/controllers',
-    		'templates': 'app/templates',
+    	'templates': 'app/templates',
 		/*libs*/
 		'jquery': 'libs/jquery/jquery',
 		'handlebars': 'libs/handlebars/handlebars',

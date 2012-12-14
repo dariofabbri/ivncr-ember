@@ -1,11 +1,8 @@
-define([
-	"ember",
-	"text!templates/applicationTemplate.html"
-], function(Ember, applicationTemplate){
+(function(app) {
 	
-	var ApplicationView = Ember.View.extend({
+	var view = Ember.View.extend({
 		
-		template: Ember.Handlebars.compile(applicationTemplate),
+		template: TemplatesUtil.compile('applicationTemplate.html'),
 		elementId: 'ember-top'
 		/*
 		childViews: ['navbarView', 'containerView', 'modaldialogView', 'footerView'],
@@ -32,6 +29,7 @@ define([
 		})
 		*/
 	});
+
+	app.ApplicationView = view;
 	
-	return ApplicationView;
-});
+})(window.App);
