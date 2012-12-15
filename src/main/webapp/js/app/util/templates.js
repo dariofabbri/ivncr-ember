@@ -22,7 +22,7 @@
 		compile: function(name) {
 			
 			var template = this.load(name);
-			return Handlebars.compile(template);
+			return Ember.Handlebars.compile(template);
 		},
 		
 		_join: function(base, part) {
