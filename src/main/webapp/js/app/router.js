@@ -1,6 +1,6 @@
 (function(app) {
 	
-	var router = Ember.Router.extend({
+	app.Router = Ember.Router.extend({
 		
 		enableLogging:  true,
 		
@@ -8,18 +8,43 @@
 	    
 			index: Ember.Route.extend({
 				route: '/',
-				enter: function(router) {
-					console.log('Entered index route.');
+				
+				connectOutlets: function(router, context) {
+					
 					if(App.LogonStateManager.currentState.name === 'loggedOff') {
 						router.transitionTo('login');
+						return;
 					}
+					
+					router.get('applicationController')
+						.connectOutlet({
+							outletName: 'container', 
+							name: 'home'
+						});
 				}
 			}),
 			
 			login: Ember.Route.extend({
-				enter: function(router) {
-					console.log('Entered login route.');
+				
+				route: '/login',
+				
+				tryLogon: function(router, context) {
+					
+					console.log('Clicked on login button!');
+
+					// Read data from view should be in controller (through binding).
+					//
+					var username = router.get('logonController.username');
+					var password = router.get('logonController.password');
+					
+					// Check credentials.
+					//
+					if(username === 'admin' && password === 'admin') {
+						App.LogonStateManager.transitionTo('loggedOn');
+						router.transitionTo('index');
+					}
 				},
+				
 				connectOutlets: function(router, context) {
 					
 					router.get('applicationController')
@@ -27,11 +52,10 @@
 							outletName: 'container', 
 							name: 'logon'
 						});
+					router.get('logonController').findPostazioni();
 				}
 			})
 		})
 	});
-
-	app.Router = router;
 	
 })(window.App);

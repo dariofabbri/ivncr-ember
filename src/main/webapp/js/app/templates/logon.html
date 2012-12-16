@@ -1,0 +1,41 @@
+<form class="well form-horizontal offset2 span6">
+	<legend>Accesso al sistema</legend>
+	<div class="control-group">
+		<label class="control-label" for="username">Nome utente: </label>
+		<div class="controls">
+			{{view App.FocusedTextField 
+				valueBinding="username"
+				required="true"
+				placeholder="Inserisci il tuo identificativo"
+			}}
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="password">Password: </label>
+		<div class="controls">
+			{{view Ember.TextField 
+				valueBinding="password"
+				required="true"
+				type="password"
+				placeholder="Inserisci la tua password"
+			}}
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="idPostazione">Postazione: </label>
+		<div class="controls">
+			<select	
+				id="idPostazione"
+				required="true">
+				<option value="">Scegliere una postazione</option>
+				{{#each postazione in postazioni}}
+				<option value="{{postazione.id}}">{{postazione.descrizione}}</option>
+				{{/each}}
+			</select>
+			<span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="form-actions">
+		<a class="btn btn-primary" {{action tryLogon}}>Accedi</a>
+	</div>
+</form>

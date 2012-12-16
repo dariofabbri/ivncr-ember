@@ -2,7 +2,7 @@
 	
 	app.ApplicationView = Ember.View.extend({
 		
-		template: TemplatesUtil.compile('applicationTemplate.html'),
+		template: TemplatesUtil.compile('application.html'),
 		elementId: 'ember-top'
 	});
 	
