@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.dariofabbri</groupId>
-	<artifactId>emberjs</artifactId>
+	<artifactId>ivncr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>EmberJS</name>
+	<name>ivncr</name>
 
 	<dependencies>
 		<dependency>
@@ -48,7 +48,7 @@
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
-			<!-- <version>9.2-1000.jdbc4</version> -->
+			<!-- <version>9.2-1002.jdbc4</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -76,7 +76,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>ember</finalName>
+		<finalName>ivncr</finalName>
 
 		<plugins>
 			<plugin>
