@@ -6,6 +6,19 @@
 		username: null,
 		password: null,
 		
+		hasError: false,
+		errorDescription: null,
+		
+		resetError: function() {
+			this.set('hasError', false);
+			this.set('errorDescription', null);
+		},
+		
+		setCredentialsError: function() {
+			this.set('hasError', true);
+			this.set('errorDescription', 'Le credenziali immesse non sono valide.');
+		},
+		
 		findPostazioni: function() {
 		
 			this.postazioni.length = 0;

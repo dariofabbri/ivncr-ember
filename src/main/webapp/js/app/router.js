@@ -40,8 +40,11 @@
 					// Check credentials.
 					//
 					if(username === 'admin' && password === 'admin') {
+						router.get('logonController').resetError();
 						App.LogonStateManager.transitionTo('loggedOn');
 						router.transitionTo('index');
+					} else {
+						router.get('logonController').setCredentialsError();
 					}
 				},
 				

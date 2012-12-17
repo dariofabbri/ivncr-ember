@@ -1,5 +1,11 @@
-<form class="well form-horizontal offset2 span6">
+<form class="well form-horizontal offset3 span6">
 	<legend>Accesso al sistema</legend>
+	{{#if hasError}}
+	<div id="notification" class="alert alert-error fade in out">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<strong>Errore</strong> {{errorDescription}}
+	</div>
+	{{/if}}
 	<div class="control-group">
 		<label class="control-label" for="username">Nome utente: </label>
 		<div class="controls">
