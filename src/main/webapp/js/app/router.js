@@ -23,6 +23,14 @@
 						});
 				}
 			}),
+		    
+			test: Ember.Route.extend({
+				route: '/test',
+				
+				connectOutlets: function(router, context) {
+					console.log('In test route!');
+				}
+			}),
 			
 			login: Ember.Route.extend({
 				
