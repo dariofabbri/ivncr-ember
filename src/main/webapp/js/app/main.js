@@ -45,8 +45,11 @@
 				processData: false,
 				contentType: 'application/json',
 				type: 'POST',
+				context: this,
 				success: function(data) {
-					store.didCreateRecords(model, data);
+					Ember.run(this, function() {
+						this.didCreateRecord(store, type, model, data);
+					});
 				}
 			});
 		}
