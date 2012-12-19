@@ -23,14 +23,40 @@
 		}
 	});
 	
+	// Create an adapter.
+	//
+	App.adapter = DS.Adapter.create({
+		
+		namespace: 'api',
+		
+		createRecord: function(store, type, model) {
+			
+			var urlParts = [this.namespace];
+			urlParts.push(type.url);
+			for(var i = 0; i < urlParts.length; i++) {
+				urlParts[i] = urlParts[i].replace(/^\/|\/$/g, '');
+			}
+			var url = urlParts.join('/');
+			
+			jQuery.ajax({
+				url: url,
+				data: JSON.stringify(model.serialize()),
+				dataType: 'json',
+				processData: false,
+				contentType: 'application/json',
+				type: 'POST',
+				success: function(data) {
+					store.didCreateRecords(model, data);
+				}
+			});
+		}
+	});
+	
 	// Create data store.
 	//
 	App.store = DS.Store.create({
 		revision: 10,
-		adapter: DS.RESTAdapter.create({
-			bulkCommit: false,
-			namespace: 'api'
-		})
+		adapter: App.adapter
 	});
 	
 })(window);

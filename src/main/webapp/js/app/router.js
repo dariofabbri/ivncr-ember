@@ -29,6 +29,31 @@
 				
 				connectOutlets: function(router, context) {
 					console.log('In test route!');
+					
+					app.Session = DS.Model.extend({
+						loggedOn: DS.attr('boolean'),
+						//idUser: 1,
+					    username: DS.attr('string'),
+					    password: DS.attr('string'),
+					    name: DS.attr('string'),
+					    surname: DS.attr('string'),
+					    logonTs: DS.attr('date'),
+					    securityToken: DS.attr('string')
+					    //"roles": null,
+					    //"permissions": null
+					});
+					app.Session.reopenClass({
+						url: '/public/security/sessions',
+					});
+					
+					var logonUser = app.store.createRecord(app.Session, {
+						username: 'admin',
+						password: 'admin'
+					});
+					app.store.commit();
+					//while(!logonUser.isLoaded) {}
+					
+					console.log('Security token:' + logonUser.get('securityToken'));
 				}
 			}),
 			
@@ -37,8 +62,6 @@
 				route: '/login',
 				
 				tryLogon: function(router, context) {
-					
-					console.log('Clicked on login button!');
 
 					// Read data from view should be in controller (through binding).
 					//
