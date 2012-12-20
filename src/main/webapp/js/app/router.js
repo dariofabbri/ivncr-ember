@@ -21,35 +21,26 @@
 							outletName: 'container', 
 							name: 'home'
 						});
+					
+					router.get('applicationController')
+						.connectOutlet({
+							outletName: 'footer', 
+							name: 'footer'
+						});
+				},
+
+				doLogoff: function(router, context) {
+	
+					app.loginInfo.session.destroy();
+					app.loginInfo = null;
+					App.LogonStateManager.transitionTo('loggedOff');
+					router.transitionTo('login');
 				}
 			}),
 			
 			login: Ember.Route.extend({
 				
 				route: '/login',
-
-				tryLogon: function(router, context) {
-
-					// Data read from view's fields should be available in 
-					// controller (through binding).
-					//
-					var username = router.get('logonController.username');
-					var password = router.get('logonController.password');
-
-					var session = app.Session.create({
-						username: username,
-						password: password
-					}); 
-					session.store({
-						success: function() {
-							App.LogonStateManager.transitionTo('loggedOn');
-							router.transitionTo('index');
-						},
-						error: function() {
-							router.get('logonController').setCredentialsError();
-						}
-					});
-				},
 				
 				connectOutlets: function(router, context) {
 					
@@ -59,6 +50,30 @@
 							name: 'logon'
 						});
 					router.get('logonController').findPostazioni();
+				},
+
+				tryLogon: function(router, context) {
+	
+					// Data read from view's fields should be available in 
+					// controller (through binding).
+					//
+					var username = router.get('logonController.username');
+					var password = router.get('logonController.password');
+	
+					app.loginInfo = {};
+					app.loginInfo.session = app.Session.create({
+						username: username,
+						password: password
+					}); 
+					app.loginInfo.session.save({
+						success: function() {
+							App.LogonStateManager.transitionTo('loggedOn');
+							router.transitionTo('index');
+						},
+						error: function() {
+							router.get('logonController').setCredentialsError();
+						}
+					});
 				}
 			}),
 			

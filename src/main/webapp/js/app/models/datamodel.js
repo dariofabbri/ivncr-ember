@@ -6,7 +6,7 @@
 		
 		id: 'id',
 		
-		store: function(options) {
+		save: function(options) {
 			
 			var that = this;
 			
@@ -51,6 +51,30 @@
 						that.setProperties(data);
 					}
 					
+					if(options && options.success) {
+						options.success(data, status, xhr);
+					}
+				},
+				error: function(xhr, status, error) {
+					if(options && options.error) {
+						options.error(xhr, status, error);
+					}
+				}
+			});
+		},
+
+		destroy: function(options) {
+
+			var url = this.buildURL(this.url, this.get(this.id));
+			
+			jQuery.ajax({
+				url: url,
+				dataType: 'json',
+				processData: false,
+				contentType: 'application/json',
+				type: 'DELETE',
+				context: this,
+				success: function(data, status, xhr) {
 					if(options && options.success) {
 						options.success(data, status, xhr);
 					}
