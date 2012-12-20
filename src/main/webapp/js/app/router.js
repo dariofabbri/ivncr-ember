@@ -23,12 +23,63 @@
 						});
 				}
 			}),
-		    
+			
+			login: Ember.Route.extend({
+				
+				route: '/login',
+
+				tryLogon: function(router, context) {
+
+					// Data read from view's fields should be available in 
+					// controller (through binding).
+					//
+					var username = router.get('logonController.username');
+					var password = router.get('logonController.password');
+
+					var session = app.Session.create({
+						username: username,
+						password: password
+					}); 
+					session.store({
+						success: function() {
+							App.LogonStateManager.transitionTo('loggedOn');
+							router.transitionTo('index');
+						},
+						error: function() {
+							router.get('logonController').setCredentialsError();
+						}
+					});
+				},
+				
+				connectOutlets: function(router, context) {
+					
+					router.get('applicationController')
+						.connectOutlet({
+							outletName: 'container', 
+							name: 'logon'
+						});
+					router.get('logonController').findPostazioni();
+				}
+			}),
+			
 			test: Ember.Route.extend({
 				route: '/test',
 				
 				connectOutlets: function(router, context) {
 					console.log('In test route!');
+
+					var session = app.Session.create({
+						securityToken: 'admin'
+					});
+					session.fetch();
+				}
+			}),
+		    
+			test1: Ember.Route.extend({
+				route: '/test1',
+				
+				connectOutlets: function(router, context) {
+					console.log('In test1 route!');
 					
 					app.Session = DS.Model.extend({
 						loggedOn: DS.attr('boolean'),
@@ -54,39 +105,6 @@
 					//while(!logonUser.isLoaded) {}
 					
 					console.log('Security token:' + logonUser.get('securityToken'));
-				}
-			}),
-			
-			login: Ember.Route.extend({
-				
-				route: '/login',
-				
-				tryLogon: function(router, context) {
-
-					// Read data from view should be in controller (through binding).
-					//
-					var username = router.get('logonController.username');
-					var password = router.get('logonController.password');
-					
-					// Check credentials.
-					//
-					if(username === 'admin' && password === 'admin') {
-						router.get('logonController').resetError();
-						App.LogonStateManager.transitionTo('loggedOn');
-						router.transitionTo('index');
-					} else {
-						router.get('logonController').setCredentialsError();
-					}
-				},
-				
-				connectOutlets: function(router, context) {
-					
-					router.get('applicationController')
-						.connectOutlet({
-							outletName: 'container', 
-							name: 'logon'
-						});
-					router.get('logonController').findPostazioni();
 				}
 			})
 		})
