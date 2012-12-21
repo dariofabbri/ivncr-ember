@@ -33,6 +33,9 @@
 	
 					app.loginInfo.session.destroy();
 					app.loginInfo = null;
+					
+					router.get('logonController').clean();
+					
 					App.LogonStateManager.transitionTo('loggedOff');
 					router.transitionTo('login');
 				}
@@ -50,6 +53,9 @@
 							name: 'logon'
 						});
 					router.get('logonController').findPostazioni();
+					
+					router.get('applicationController')
+						.disconnectOutlet('footer');
 				},
 
 				tryLogon: function(router, context) {

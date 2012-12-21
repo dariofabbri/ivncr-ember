@@ -1,5 +1,7 @@
 (function (win) {
 	
+	Ember.LOG_BINDINGS = true;
+	
 	// Create Ember application.
 	//
 	win.App = Ember.Application.create({

@@ -19,6 +19,11 @@
 			this.set('errorDescription', 'Le credenziali immesse non sono valide.');
 		},
 		
+		clean: function() {
+			this.set('username', null);
+			this.set('password', null);
+		},
+		
 		findPostazioni: function() {
 		
 			this.postazioni.length = 0;
