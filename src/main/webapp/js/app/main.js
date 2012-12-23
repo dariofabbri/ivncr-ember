@@ -1,6 +1,6 @@
 (function (win) {
 	
-	Ember.LOG_BINDINGS = true;
+	//Ember.LOG_BINDINGS = true;
 	
 	// Create Ember application.
 	//

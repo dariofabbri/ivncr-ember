@@ -83,6 +83,32 @@
 				}
 			}),
 			
+			modaldialog: Ember.Route.extend({
+				route: '/modaldialog',
+				
+				connectOutlets: function(router, context) {
+					console.log('In modaldialog route!');
+					
+					router.get('applicationController')
+						.connectOutlet({
+							outletName: 'modaldialog', 
+							name: 'modalDialog'
+						});
+				},
+				
+				ok: function(router, context) {
+					
+					router.get('applicationController')
+						.disconnectOutlet('modaldialog');
+				},
+				
+				cancel: function(router, context) {
+					
+					router.get('applicationController')
+						.disconnectOutlet('modaldialog');					
+				}				
+			}),
+			
 			test: Ember.Route.extend({
 				route: '/test',
 				

@@ -22,6 +22,8 @@
 		clean: function() {
 			this.set('username', null);
 			this.set('password', null);
+			
+			this.resetError();
 		},
 		
 		findPostazioni: function() {
