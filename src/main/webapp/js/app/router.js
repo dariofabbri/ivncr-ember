@@ -18,6 +18,12 @@
 					
 					router.get('applicationController')
 						.connectOutlet({
+							outletName: 'navbar', 
+							name: 'navbar'
+						});
+					
+					router.get('applicationController')
+						.connectOutlet({
 							outletName: 'container', 
 							name: 'home'
 						});
@@ -48,14 +54,17 @@
 				connectOutlets: function(router, context) {
 					
 					router.get('applicationController')
+						.disconnectOutlet('navbar');
+					
+					router.get('applicationController')
+						.disconnectOutlet('footer');
+					
+					router.get('applicationController')
 						.connectOutlet({
 							outletName: 'container', 
 							name: 'logon'
 						});
 					router.get('logonController').findPostazioni();
-					
-					router.get('applicationController')
-						.disconnectOutlet('footer');
 				},
 
 				tryLogon: function(router, context) {
